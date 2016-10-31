@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>登陆Cookie</title>
+	<meta charset="utf-8"></head>
+<body>
+	用户名:
+	<input type="text" name="" id="name">
+	密码:
+	<input type="password" name="" id="password">
+	<input type="checkbox" id="remember">
+	记住密码
+	<button>登陆</button>
+	<button id="" onclick="getCookie()">显示Cookie</button>
+	<script type="text/javascript">
+	 nameValue ='';
+	 pass = '';
+function setCookie(name,value,iDay){
+	var oDate = new Date();
+	oDate.setDate(oDate.getDate()+iDay);
+	document.cookie = name + '=' + value + ';expires='+oDate;
+}
+function setCookievalue(){
+	var nameValue = document.getElementById('name').value;
+	var pass = document.getElementById('password').value;
+	 setCookie('name',nameValue,10);
+	 setCookie('password',pass,10);
+}
+ 	var $remember = document.getElementById("remember");
+ 	$remember.onclick = function(){
+		if(document.getElementById("remember").checked){
+			setCookievalue();
+		}
+		else{
+			removeCookie();
+		}
+}
+var arr = document.cookie.split(';');
+  for (var i = 0; i < arr.length; i++) {
+	 	arr2 = arr[i].split('=');
+	 	  console.log(arr2);
+	 }
+
+
+function getCookie(name){
+	 var arr = document.cookie.split(';');
+	 for (var i = 0; i < arr.length; i++) {
+	 	arr2 = arr[i].split('=');	 	
+		if (arr2[0] == 'name') {
+			return arr2[1];			
+		} 
+	}
+	return '';
+}	
+//
+document.getElementById('name').value = getCookie();
+function removeCookie(name,password){
+		setCookie('name','1',-1);
+		setCookie('password','1',-1);
+}
+</script></body>
+</html>
